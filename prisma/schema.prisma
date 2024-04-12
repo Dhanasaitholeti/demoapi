@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Occurences {
+  monthly
+  yearly
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model employee {
+  id             String   @id @default(uuid())
+  name           String
+  payable        Boolean
+  salaryPerMonth Int
+  createAt       DateTime @default(now())
+  updatedAt      DateTime @default(now())
+}
+
+model overhead {
+  id        String     @id @default(uuid())
+  name      String
+  amount    Int
+  occurence Occurences
+  createAt  DateTime   @default(now())
+  updatedAt DateTime   @default(now())
+}
